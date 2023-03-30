@@ -4,6 +4,7 @@ import (
     "context"
     "github.com/869413421/chatgpt-web/kitex_gen/api"
     "github.com/869413421/chatgpt-web/kitex_gen/api/chat"
+    "github.com/869413421/chatgpt-web/pkg/model/user"
     "github.com/869413421/chatgpt-web/pkg/types"
     "github.com/cloudwego/kitex/client"
     "net"
@@ -71,7 +72,8 @@ func (c *ChatController) CompletionService(ctx *gin.Context) {
     //       request.Messages[i].Content = string(msgRune[:500])
     //    }
     //}
-    logger.Info(request)
+    authUser, _ := ctx.Get("authUser")
+    logger.Info(request, authUser.(*user.User).Name)
 
     resp, err := chatClient.Completion(ctx, &request)
     if err != nil {

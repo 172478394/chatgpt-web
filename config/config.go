@@ -38,6 +38,7 @@ type Configuration struct {
     AuthPassword     string  `json:"auth_password"` // 密码
     JwtKey           string  `json:"jwt_key"`
     Secret           string  `json:"secret"`
+    Dsn              string  `json:"dsn"`
 }
 
 var config *Configuration
@@ -60,6 +61,7 @@ func LoadConfig() *Configuration {
         }
 
         // 判断配置文件是否存在，存在直接JSON读取
+        CLI.Config = "config.json"
         _, err := os.Stat(CLI.Config)
         if err == nil {
             f, err := os.Open(CLI.Config)
