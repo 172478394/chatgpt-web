@@ -20,3 +20,8 @@ storage.json
 /config.json
 
 go.sum
+
+chat.db
+chatgpt-web
+kitex_gen
+vendor

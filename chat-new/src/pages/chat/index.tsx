@@ -28,7 +28,7 @@ const initialMessages = [
     {
         type: 'text',
         content: {
-            text: '您好，我是AI助理',
+            text: '您好，我是AI助理。受限于api，上下文功能仅在最后2次对话有效。请尽量在单次对话中完成操作。',
         },
         user: {avatar: '//gitclone.com/download1/gitclone.png'},
     },
@@ -142,8 +142,15 @@ function App() {
             content: question,
         })
 
+        let newChatContext: any[] = []
+        const newChatContextLen = 5
+        if (chatContext.length <= newChatContextLen) {
+            newChatContext = chatContext
+        } else {
+            newChatContext = chatContext.slice(-newChatContextLen)
+        }
 
-        const res = await completion(chatContext);
+        const res = await completion(newChatContext);
         if (res.data.code === 200) {
             let reply = clearReply(res.data.data.reply)
             appendMsg({

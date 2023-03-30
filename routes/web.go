@@ -17,10 +17,11 @@ func RegisterWebRoutes(router *gin.Engine) {
 	router.POST("user/auth", authController.Auth)
 	chat := router.Group("/chat").Use(middlewares.Jwt())
 	{
-		chat.POST("/completion", chatController.Completion)
+		chat.POST("/completion", chatController.CompletionService)
 	}
 	auth := router.Group("/auth").Use(middlewares.Jwt())
 	{
 		auth.POST("/info", authController.Info)
+		auth.POST("/addUser", authController.AddUser)
 	}
 }

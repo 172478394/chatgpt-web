@@ -1,11 +1,11 @@
 package model
 
 import (
-	"time"
 
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 	gloger "gorm.io/gorm/logger"
+	"time"
 
 	"github.com/869413421/chatgpt-web/pkg/logger"
 	"github.com/869413421/chatgpt-web/pkg/types"
@@ -34,7 +34,7 @@ func ConnectDB() *gorm.DB {
 	dsn := "chat.db"
 	var err error
 	DB, err = gorm.Open(sqlite.Open(dsn), &gorm.Config{
-		Logger: gloger.Default.LogMode(gloger.Info),
+		Logger: gloger.Default.LogMode(gloger.Warn),
 	})
 	if err != nil {
 		logger.Danger("open sqlite error:", err)
