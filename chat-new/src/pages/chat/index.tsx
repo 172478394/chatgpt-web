@@ -10,6 +10,7 @@ import MdEditor from "md-editor-rt"
 import "md-editor-rt/lib/style.css"
 import sanitizeHtml from 'sanitize-html';
 import {completion} from '../../services/port'
+import riseInput from "@chatui/core/lib/components/Composer/riseInput";
 
 const defaultQuickReplies = [
     {
@@ -42,11 +43,24 @@ function App() {
 
     const handleFocus = () => {
         setTimeout(() => {
-            window.scrollTo(0, document.body.scrollHeight)
+            const input = document.querySelector('textarea');
+            if (input !== null) {
+                input.scrollIntoView();
+            }
+            // window.scrollTo(0, document.body.scrollHeight)
 
-        }, 10)
+        }, 100)
     }
 
+    const handleBlur = () => {
+        setTimeout(() => {
+            // document.body.scrollIntoView();
+            const input = document.querySelector('textarea');
+            if (input !== null) {
+                input.scrollIntoView();
+            }
+        }, 100)
+    }
 
     // clearQuestion 清空文本特殊字符
     function clearQuestion(requestText: string) {
@@ -75,7 +89,7 @@ function App() {
             appendMsg({
                 type: 'text',
                 content: {text: val},
-                position: 'left',
+                position: 'right',
                 user: {avatar: '//gitclone.com/download1/user.png'},
             })
 
@@ -162,6 +176,12 @@ function App() {
             console.log(chatContext)
             setPercentage(0)
 
+            setTimeout(() => {
+                const input = document.querySelector('textarea');
+                if (input !== null) {
+                    input.scrollIntoView();
+                }
+            }, 100)
         } else {
             return toast.fail('请求出错，' + res.data.errorMsg, undefined)
         }
@@ -193,6 +213,7 @@ function App() {
                 onQuickReplyClick={handleQuickReplyClick}
                 onSend={handleSend}
                 onInputFocus={handleFocus}
+                onInputBlur={handleBlur}
             />
             <Progress value={percentage}/>
         </div>

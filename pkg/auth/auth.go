@@ -41,7 +41,7 @@ func Decode(tokenString string) (*CustomClaims, error) {
 // Encode a claim into a JWT
 func Encode(user *user.User) (string, error) {
 
-    expireToken := time.Now().Add(time.Hour * 72).Unix()
+    expireToken := time.Now().Add(time.Hour * 24 * 30).Unix()
 
     // Create the Claims
     claims := CustomClaims{
