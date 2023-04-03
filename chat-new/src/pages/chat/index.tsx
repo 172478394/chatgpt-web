@@ -150,7 +150,7 @@ function App() {
     }
 
     async function onGenCode(question: string) {
-        question = clearQuestion(question)
+        // question = clearQuestion(question)
         chatContext.push({
             role: 'user',
             content: question,
